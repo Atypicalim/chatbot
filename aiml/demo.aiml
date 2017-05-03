@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiml version="1.0">
+
+    <topic name="demo">
+
+        <!--
+
+        # ==> .*
+        * ==> .+
+        _ ==> .+
+
+        you can use these two wildcard to match your string ,
+        it is suitable for utf8,
+        and it is very useful for these languages which words will change themselves in the end
+
+         -->
+
+
+        <!--
+        简单说明一下AIML的常用标签:
+        1：pattern tag:支持模式匹配(正则表达式，模糊匹配),及基于template的返回
+        2：random tag:支持随机回答（一对多）
+        4：think,system tag: 支持简单逻辑记忆及自定义函数(本来打算扩展一下AIML, 搞一个支持Groovy语言的标签， 结果看到了它的<system>标签， 遂作罢)
+        5：javascript tag: 支持嵌入js脚本(适用于web chat开发，比如根据情绪改变表情等)。
+        6：srai tag: 支持多对一回答.
+         -->
+
+
+        <!-- ordinary -->
+        <category>
+            <pattern>haha</pattern>
+            <template>
+                haha ...
+            </template>
+        </category>
+
+        <!-- 必选 *,# -->
+        <category>
+            <pattern>789 *</pattern>
+            <template>
+                you only can inpt '789 123' , and '789' or '789123' is unable to match it
+            </template>
+        </category>
+
+        <!-- 必选 * -->
+        <category>
+            <pattern>abc#</pattern>
+            <template>
+                you only can inpt 'abc123' , and 'abc' is unable to match it
+            </template>
+        </category>
+
+        <!-- 可选 # -->
+        <category>
+            <pattern>xyz#</pattern>
+            <template>
+                you can input 'xyz' or 'xyz123'
+            </template>
+        </category>
+
+        <!-- random -->
+        <category>
+            <pattern>h1</pattern>
+            <pattern>h2</pattern>
+            <pattern>h3</pattern>
+            <template>
+                <random>
+                    <li>
+                        <random>
+                            <li>well , hello 1 1 ...</li>
+                            <li>well , hello 1 2 ...</li>
+                            <li>well , hello 1 3 ...</li>
+                        </random>
+                    </li>
+                    <li>well , hello 2 ...</li>
+                    <li>well , hello 3 ...</li>
+                </random>
+            </template>
+        </category>
+
+        <!-- remember1 -->
+        <category>
+            <pattern>my name is *</pattern>
+            <template>
+                ok , your name is
+                <star/>
+                <set type="user" name="name">
+                    <star/>
+                </set>
+            </template>
+        </category>
+        <category>
+            <pattern>what is my name</pattern>
+            <template>
+                oh , your name is
+                <get type="user" name="name"/>
+                , i remembered it last time ...
+            </template>
+        </category>
+
+        <!-- 思考上一句 -->
+        <category>
+            <pattern>student</pattern>
+            <template>
+                are you student?
+            </template>
+        </category>
+        <category>
+            <pattern>yes</pattern>
+            <that>are you student?</that>
+            <template>
+                which school are you in?
+            </template>
+        </category>
+        <category>
+            <pattern>programmer</pattern>
+            <template>
+                are you programmer?
+            </template>
+        </category>
+        <category>
+            <pattern>yes</pattern>
+            <that>are you programmer?</that>
+            <template>
+                which programming language do you like?
+            </template>
+        </category>
+
+        <!-- 跳转 -->
+        <category>
+            <pattern>is it true</pattern>
+            <template>
+                <srai>true</srai>
+            </template>
+        </category>
+        <category>
+            <pattern>is it really</pattern>
+            <template>
+                <srai>true</srai>
+            </template>
+        </category>
+        <category>
+            <pattern>is it right</pattern>
+            <template>
+                <srai>true</srai>
+            </template>
+        </category>
+        <category>
+            <pattern>true</pattern>
+            <template>
+                yeah man , it is deadly belivieable ...
+            </template>
+        </category>
+
+        <!-- 多对一 -->
+        <category>
+            <pattern>pattern1</pattern>
+            <pattern>pattern2</pattern>
+            <pattern>pattern3</pattern>
+            <template>
+                template to several patterns ...
+            </template>
+        </category>
+
+
+        <!-- 上次的输入 -->
+        <category>
+            <pattern>one</pattern>
+            <template>
+                this is one
+            </template>
+        </category>
+        <category>
+            <pattern>two</pattern>
+            <template>
+                this is two
+            </template>
+        </category>
+        <category>
+            <pattern>three</pattern>
+            <template>
+                this is three ,
+                1:
+                <input index="1"/>
+                ,<!--- this -->
+                2:
+                <input index="2"/>
+                ,<!--- last -->
+                3:
+                <input index="3"/> <!--- last last -->
+            </template>
+        </category>
+
+        <!--  -->
+        <category>
+            <pattern>botInfo</pattern>
+            <template>
+                name :
+                <bot name="name"/>
+                , age
+                <bot name="age"/>
+                , website :
+                <bot name="website"/>
+                , version :
+                <bot name="version"/>
+                ...
+            </template>
+        </category>
+
+
+        <!-- learn -->
+        <!-- 	<category>
+                <pattern>LOAD AIML A</pattern>
+                <template>
+                    <learn>1.aiml</learn>
+                    <learn>1.aiml</learn>
+                </template>
+            </category>
+        -->
+        <!-- 系统调用 -->
+        <!--
+            <category>
+                <pattern>system</pattern>
+                <template>
+                    <system>
+                        learn("<input index="1"/>","<input index="2"/>")
+                    </system>
+                </template>
+            </category>
+        -->
+
+        <!-- 思考 -->
+        <!--
+            <category>
+                <pattern>think</pattern>
+                <template>
+                    <think>
+                        <set name="name1"><star/></set>
+                    </think>
+                    hello, <get name="name1"/>
+                </template>
+            </category>
+        -->
+
+    </topic>
+
+</aiml>

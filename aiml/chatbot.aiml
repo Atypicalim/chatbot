@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiml version="1.0">
+
+
+<!-- includes -->
+<include file="./demo.aiml"/>
+
+
+<category>
+    <pattern>hello</pattern>
+    <template>
+        hello ...
+    </template>
+</category>
+
+
+<category>
+    <pattern>你好</pattern>
+    <template>
+        你好 ...
+    </template>
+</category>
+
+
+<default>
+    我不太理解你在说什么  ...
+</default>
+
+
+
+<!-- the uyghur aiml file, you can delete it if don't need -->
+
+</aiml>

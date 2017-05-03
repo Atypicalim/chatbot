@@ -1,0 +1,86 @@
+
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+#body {
+	background: url("http://img02.tooopen.com/images/20160325/tooopen_sy_157213387517.jpg");
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}
+
+#box1 {
+	height: 75%;
+	width: 80%;
+	display: block;
+}
+
+#box2 {
+	height: 25%;
+	width: 80%;
+}
+
+h2 {
+	height: 10%;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+	font-size: 34px;
+}
+
+a:hover {
+	text-shadow: 2px 2px 2px red;
+}
+
+
+.chatBox {
+	cursor: pointer;
+	display: inline-block;
+	background: rgba(55,55,55,0.5);
+	height: 50%;
+	width: 90%;
+	overflow: auto;
+	text-align: left;
+	text-indent: 10%;
+	color: white;
+	text-shadow: 1px 1px 1px black;
+	font-size: 20px;
+	padding-top: 20px;
+}
+
+form {
+	height: 100%;
+	widows: 100%;
+}
+#userInput {
+	display:inline-block;
+	width: 50%;
+	height: 30%;
+	font-size: 24px;
+	background: rgba(55,55,55,0.5);
+	outline:0;
+	border:3px rgba(155,155,155,0.3) solid;
+	border-left:5px rgba(22,22,22,0.9) solid;
+	box-shadow:5px 5px 5px black;
+	color:rgba(200,200,200,0.8);
+	text-decoration: none;
+	text-indent: 0.5em;
+}
+#send, #clean {
+	display:inline-block;
+	width: 15%;
+	height: 30%;
+	font-size: 24px;
+	background: rgba(150, 150, 150, 0.3);
+	outline:0;
+	color:white;
+	border:3px rgba(155,155,155,0.5) solid;
+	box-shadow:5px 5px 5px black;
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+	text-overflow: hidden;
+}
