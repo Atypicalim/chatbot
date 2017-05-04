@@ -76,7 +76,7 @@ class Connection
         //
 
         // tenta abrir uma conexão
-        self::$connIdent = mysqli_connect(self::$host, self::$user, self::$pass, self::$dbName) or die("\nmysqli connection err : ". mysqli_error());
+        self::$connIdent = mysqli_connect(self::$host, self::$user, self::$pass, self::$dbName) or die("\nmysqli connection err : ". mysqli_error(self::$connIdent));
         if (self::$connIdent->connect_error) {
             die("mysql con err : " . $conn->connect_error);
         }
@@ -84,17 +84,6 @@ class Connection
         self::$isConnected = true;
     }
 
-    public static function CreateDatabase($database)
-    {
-        self::$connIdent = mysqli_connect(self::$host, self::$user, self::$pass);
-        $sql = '
-				CREATE DATABASE 
-					IF NOT EXISTS
-				' . $database . ';
-			';
-
-        mysqli_query(self::$connIdent, $sql) or die('Query Invalid : ' . mysqli_errno() . "\nSql is :\n" . $sql);
-    }
 
     /**
      * Verifica se a base de dados existe
