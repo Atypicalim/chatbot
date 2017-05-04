@@ -45,7 +45,7 @@ class Connection
      * Identificador da ultima conexão aberta
      * @var int|bool
      */
-    protected static $connIdent;
+    public static $connIdent;
 
     protected static $transactionOpen = false;
 
@@ -76,23 +76,24 @@ class Connection
         //
 
         // tenta abrir uma conexão
-        self::$connIdent = mysql_connect(self::$host, self::$user, self::$pass) or die('' . mysql_error());
-        mysql_select_db(self::$dbName, self::$connIdent) or die('database '.self::$dbName.' in not found , err : ' . mysql_error());
-
+        self::$connIdent = mysqli_connect(self::$host, self::$user, self::$pass, self::$dbName) or die("\nmysqli connection err : ". mysqli_error());
+        if (self::$connIdent->connect_error) {
+            die("mysql con err : " . $conn->connect_error);
+        }
         // seta a conexão para aberta
         self::$isConnected = true;
     }
 
     public static function CreateDatabase($database)
     {
-        self::$connIdent = mysql_connect(self::$host, self::$user, self::$pass);
+        self::$connIdent = mysqli_connect(self::$host, self::$user, self::$pass);
         $sql = '
 				CREATE DATABASE 
 					IF NOT EXISTS
 				' . $database . ';
 			';
 
-        mysql_query($sql, self::$connIdent) or die('Query Invalid : ' . mysql_errno() . "\nSql is :\n" . $sql);
+        mysqli_query(self::$connIdent, $sql) or die('Query Invalid : ' . mysqli_errno() . "\nSql is :\n" . $sql);
     }
 
     /**
@@ -102,13 +103,13 @@ class Connection
      */
     public static function CheckDatabaseExist($database)
     {
-        self::$connIdent = mysql_connect(self::$host, self::$user, self::$pass);
+        self::$connIdent = mysqli_connect(self::$host, self::$user, self::$pass);
 
         $sql = 'SELECT COUNT(*) AS `exists` FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMATA.SCHEMA_NAME="' . $database . '"';
 
-        $result = mysql_query($sql, self::$connIdent) or die('Query Invalid: ' . mysql_errno() . "\nSql is :\n" . $sql);
+        $result = mysqli_query(self::$connIdent, $sql) or die('Query Invalid: ' . mysqli_errno() . "\nSql is :\n" . $sql);
 
-        $data = mysql_fetch_assoc($result);
+        $data = mysqli_fetch_assoc($result);
         return $data['exists'] == '1';
     }
 
@@ -125,7 +126,7 @@ class Connection
             self::OpenConnect();
         //
 
-        $result = mysql_query($sql, self::$connIdent) or die('Query Invalid : ' . mysql_error() . "\nSql is :\n" . $sql);
+        $result = mysqli_query(self::$connIdent, $sql) or die('Query Invalid : ' . mysqli_error() . "\nSql is :\n" . $sql);
         return $result;
     }
 
@@ -139,7 +140,7 @@ class Connection
         $data = array();
         $result = self::Query($sql);
 
-        while ($row = mysql_fetch_assoc($result))
+        while ($row = mysqli_fetch_assoc($result))
             $data[] = $row;
         //
 
@@ -151,7 +152,7 @@ class Connection
      */
     public static function Close()
     {
-        mysql_close(self::$connIdent);
+        mysqli_close(self::$connIdent);
     }
 
     /**

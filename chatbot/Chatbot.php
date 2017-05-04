@@ -131,8 +131,8 @@ class Chatbot
      */
     private function log(User $user, $input, $response, Bot $bot)
     {
-        $input = mysql_real_escape_string(utf8_decode($input));
-        $response = mysql_real_escape_string(utf8_decode(trim($response)));
+        $input = mysqli_real_escape_string(Connection::$connIdent, utf8_decode($input));
+        $response = mysqli_real_escape_string(Connection::$connIdent,utf8_decode(trim($response)));
         // log conversation
         $sql = "INSERT INTO log (user, bot, input, response, date) VALUE ('" . $user->getUnique() . "', '" . $bot->getUnique() . "', '" . trim($input) . "', '" . trim($response) . "', NOW());";
         Connection::Query($sql);
