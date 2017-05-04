@@ -1,43 +1,46 @@
-#  基于AIML的PHP聊天天机器人
+#  An aiml parser for PHP
 
-## 0. 介绍
-
-> 该聊天机器人是参考AIML 2.5和[Program-P](https://github.com/pe77/Program-P)而写成的，适用于UTF-8编码的，单词后缀根据不同的时态而改变的那些语言。感兴趣的朋友可以自己研究学习一下。
-
-## 1. 下载安装
-
-> `git clone https://github.com/kompasim/chatbot.git`，下载之后完成下面那些步骤就可以直接上传到自己的服务器了。
-
-## 2. 数据库的配置
-
-> 数据库用到了MySQL，可以在`chatbot`文件爱你家里面看到`Config.php`配置文件，并且在里面填写数据库有关信息。
-
-## 3. 导入数据库备份文件
-
-> 把根目录里面的`chatbot.sql`导入到数据库，里面是存储聊天机器人的配置信息，请求记录等信息的表。
-
-## 4. 添加个性化语料库
-
-> 我们把`aiml/chatbot.aiml`打开编辑或者新建一个`aiml`文件，添加我们的性化语料库，再把新的`aiml`文件include到`chatbot.aiml`。
-
-## 5. 关于AIML文件
-
-> * `aiml` 语料库文件都要放在根目录里面的`aiml`文件夹下面。`chatbot.aiml`值入口文件，里面的`aiml`根标签里面可以包含多个`category`标签和一个`default`标签，多个`include`标签。
-
-> * 其他`aiml`文件在`aiml`根标签里面必须先包含`topic`标签，里面再包含多个`category`和一个`default`标签，不能有`include`标签。
+--- 
 
 
-## 6. 测试聊天机器人
+### [中文](README_CH.md) 
 
-> 打开`imdex.php`之后可以测试我们刚刚添加的语料库。
+---
 
-## 7. 调用api
+## 0. notice
 
-> 如果希望在公众号或者自己的APP里面调用聊天机器人我们可以这样调用它的api `api.php?requestType=talk&input=你好`
+> the chatbot is writen accordign to AIML 2.5 and [Program-P](https://github.com/pe77/Program-P)，it uses utf-8 and i made some customizaton , there is some differences between standard aiml tags and the tags uses in this program.
 
-## 8. 关于匹配规则
+## 1. description
 
-> 修改之后的匹配规则 :
+> it is working well on PHP5.4 and Apache server .
+
+## 2. database configuration
+
+> you should use MySQL database and import the `chatbot.sql` file to your database . then, you should configure your database information in `chatbot/Config.php` file . 
+
+
+## 4. aiml sourses
+
+> you can edit `aiml/chatbot.aiml` fiel directly or create an aiml file in aiml directory and include it in `aiml/chatbot.aiml` file。
+
+## 5. about aiml
+
+> * `aiml` files should be paleced in `aiml`directory. 
+
+> * `chatbot.aiml`is the entrance ，the `aiml` tag in it can contain various `category` tag , a `default`tag and various `include`tag。
+
+> * other `aiml` files writen by you should contain a `topic` tag in root `aiml` tag , and the topic can contain various `category` tag and a `default` tag (it should not have `include` tag)。
+
+
+## 6. test
+
+> you can visit `index.php` or `api.php?requestType=talk&userInput=hello`。
+
+
+## 8. about the regular expressions
+
+> Modified matching rules :
 
 ```PHP
 * ---> (\S+)
@@ -46,12 +49,12 @@ _ ---> .*
 = ---> \S*
 ```
 
-## 9. 关于AIML标签
+## 9. about aiml tags
 
-> * 本聊天机器人的`aiml`标签和标准`aiml`标签有所不同，我们可以在[AIML.MD](AIML.md)文件里面查到更多本聊天机器人所支持的标签。
+> * it is different from the standard aiml，i made some customizaton to aiml tags , you can see the tag rules in [AIML.MD](AIML.md) file。
 
 
-## 10. 项目github地址
+## 10. Enjoy it
 
 > [https://github.com/kompasim/chatbot](https://github.com/kompasim/chatbot)
 

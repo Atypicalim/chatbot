@@ -4,7 +4,7 @@
 class Config
 {
 
-    public $log = true;
+    public $log = false;
     public $multiChatbot = true;
 
     public $connectionInfo = array(

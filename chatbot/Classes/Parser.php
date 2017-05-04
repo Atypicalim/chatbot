@@ -147,16 +147,18 @@ class Parser
             LOG && print "\n";
 
             $xpathQuery = "./aiml/topic[@name='" . self::getTopicFromData(0) . "']";
-            $oneTopic = self::$_domXPath->query($xpathQuery, self::$_domDoc)->item(0);
-            // find corresponding category
-            if ($category = self::searchCategory($oneTopic)) {
-                LOG && print "found a category ...\n";
-                // pre-process template tag and set response
-                $responseString = self::processDomElement(
-                    self::getAllTagsByName($category, './template', true)
-                );
+            if ($oneTopic = self::$_domXPath->query($xpathQuery, self::$_domDoc)->item(0)) {
+                // find corresponding category
+                if ($category = self::searchCategory($oneTopic)) {
+                    LOG && print "found a category ...\n";
+                    // pre-process template tag and set response
+                    $responseString = self::processDomElement(
+                        self::getAllTagsByName($category, './template', true)
+                    );
+                }
             }
-        } else {
+        }
+        if ($responseString == ''){
             //  process template if  match a cateegory in aiml root tag, else search all topics
             if ($category = self::searchCategory(self::$_domXPath->query("./aiml", self::$_domDoc)->item(0))) {
                 // pre-process template tag and set response

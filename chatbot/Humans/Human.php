@@ -27,9 +27,9 @@ class Human
         // Load all properties
         $this->loadAllProps();
 
-        print "\n".$type." ";
-        print_r($this->_props);
-        print "\n";
+        LOG && print "\n".$type." ";
+        LOG && print_r($this->_props);
+        LOG && print "\n";
 
 
     }
