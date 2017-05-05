@@ -53,8 +53,99 @@ _ ---> .*
 
 > * it is different from the standard aiml，i made some customizaton to aiml tags , you can see the tag rules in [AIML.MD](AIML.md) file。
 
+## 10. about the response of api.php
 
-## 10. Enjoy it
+
+```json
+{
+    "status": "success",
+    "type": "talk",
+    "message": "haha ...",
+    "data": {
+        "arr1": {
+            "name11": "value11",
+            "name12": "value12"
+        },
+        "arr2": {
+            "name21": "value21",
+            "name22": "value22"
+        }
+    }
+}
+```
+
+> you will get above response when you visit `api.php?requestType=talk&userInput=haha` and you have a category like this .
+
+```xml
+<category>
+    <pattern>haha</pattern>
+    <template>
+        <data name="arr1">
+            <attr name="name11">value11</attr>
+            <attr name="name12">value12</attr>
+        </data>
+        <data name="arr2">
+            <attr name="name21">value21</attr>
+            <attr name="name22">value22</attr>
+        </data>
+        haha ...
+    </template>
+</category>
+```
+
+## 11. about userId
+
+> when you send a userId param as a get param , this will be used as a unique identity of user , or the program will use user's ip instead of it .
+
+```php
+$userId = isset($_REQUEST['userId']) ? $_REQUEST['userId'] : $_SERVER['REMOTE_ADDR'];
+```
+
+## 12. about multi chatbot
+
+> if you set the multiChatbot variable false in 'chatbot/Config.php' , all users share a default chatbot . and if you set it true , every user will have a unique chatbot and we will set the chatbot informations in template tag , like botName , botAge , botSex and others , this will be verry usefull when you are building a voice assistant app and hoping the users can reaname your app . the multi chatbot also uses the userId as a unique itentity . 
+
+```php
+$user = $this->getUser($this->_unique);
+if ($this->_config->multiChatbot){
+    $bot = $this->getBot($this->_unique);
+} else {
+    $bot = $this->getBot("default");
+}
+```
+
+## 13. about userInfo and botInfo
+
+> userInfo is user's properties like name , sex and age . then , botInfo is similar too . botInfo is the bot's information serving for the user . if you using multi chatbot mode , every user can change their bot's informations , they can rename it , and give it a age . for usage you can view the [AIML.MD](AIML.md) file and study about the tags like set, get, del, user, bot.
+
+```xml
+<category>
+    <pattern>my name is *</pattern>
+    <template>
+        ok , your name is
+        <star/>
+        <set type="user" name="name">
+            <star/>
+        </set>
+    </template>
+</category>
+
+<category>
+    <pattern>what is my name</pattern>
+    <template>
+        oh , your name is
+        <get type="user" name="name"/>
+        , i remembered it last time ...
+    </template>
+</category>
+```
+
+
+
+
+---
+
+#  Enjoy it
 
 > [https://github.com/kompasim/chatbot](https://github.com/kompasim/chatbot)
 

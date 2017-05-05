@@ -30,6 +30,14 @@
         <category>
             <pattern>haha</pattern>
             <template>
+                <data name="arr1">
+                    <attr name="name11">value11</attr>
+                    <attr name="name12">value12</attr>
+                </data>
+                <data name="arr2">
+                    <attr name="name21">value21</attr>
+                    <attr name="name22">value22</attr>
+                </data>
                 haha ...
             </template>
         </category>

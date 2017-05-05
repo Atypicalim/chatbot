@@ -283,7 +283,6 @@ class Parser
                     // loop all values
                     foreach ($data->childNodes as $attrTag) {
                         if ($attrTag->nodeName == "attr") {
-                            print "\n\n" . $attrTag->nodeName . "\n\n";
                             $name = $attrTag->getAttribute("name");
                             $attributeValue = $attrTag->getAttribute('value');
                             $nodeValue = self::processDomElement($attrTag);
