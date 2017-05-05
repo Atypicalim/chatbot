@@ -143,7 +143,9 @@ if ($this->_config->multiChatbot){
 ## 14. about database
 
 > `log` table is for logging . 
+
 > `property` table is for storing the userInfo and botInfo , it is the memory of the chatbot . set ,get, del, user, bot tags are operating this table .
+
 > `data` table is for storing the words spoken by user and bot . input , that, topic tags will operate Parser::$_data array and the array will be saved to data table when the program is finishing . then , it will be loaded at the next time users requests the chatbot program . the unique key in data table is userId(ip or the value you send it to chatbot) too.
 
 
