@@ -103,7 +103,7 @@ $userId = isset($_REQUEST['userId']) ? $_REQUEST['userId'] : $_SERVER['REMOTE_AD
 
 ## 12. about multi chatbot
 
-> if you set the multiChatbot variable false in 'chatbot/Config.php' , all users share a default chatbot . and if you set it true , every user will have a unique chatbot and we will set the chatbot informations in template tag , like botName , botAge , botSex and others , this will be verry usefull when you are building a voice assistant app and hoping the users can reaname your app . the multi chatbot also uses the userId as a unique itentity . 
+> if you set the multiChatbot variable false in 'chatbot/Config.php' , all users share a default chatbot . and if you set it true , every user will have a unique chatbot and we will set the chatbot informations in template tag , like botName , botAge , botSex and others , this will be verry usefull when you are building a voice assistant app and hoping the users can reaname your app . the multi chatbot also uses the userId(ip or the value you send it to chatbot) as a unique identity . 
 
 ```php
 $user = $this->getUser($this->_unique);
@@ -140,6 +140,11 @@ if ($this->_config->multiChatbot){
 </category>
 ```
 
+## 14. about database
+
+> `log` table is for logging . 
+> `property` table is for storing the userInfo and botInfo , it is the memory of the chatbot . set ,get, del, user, bot tags are operating this table .
+> `data` table is for storing the words spoken by user and bot . input , that, topic tags will operate Parser::$_data array and the array will be saved to data table when the program is finishing . then , it will be loaded at the next time users requests the chatbot program . the unique key in data table is userId(ip or the value you send it to chatbot) too.
 
 
 
