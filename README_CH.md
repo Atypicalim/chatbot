@@ -3,7 +3,7 @@
 
 --- 
 
-### [英文](README.md) 
+### [English](README.md) 
 
 ---
 
