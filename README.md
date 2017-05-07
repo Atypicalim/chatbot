@@ -24,7 +24,7 @@
 
 > you can edit `aiml/chatbot.aiml` fiel directly or create an aiml file in aiml directory and include it in `aiml/chatbot.aiml` file。
 
-## 5. about aiml
+## 5. about aiml files
 
 > * `aiml` files should be paleced in `aiml`directory. 
 
@@ -35,7 +35,11 @@
 
 ## 6. test
 
-> you can visit `index.php` or `api.php?requestType=talk&userInput=hello`。
+> you can visit `index.php` to test it.
+
+## 7. using the chatbot
+ 
+> if you want to use the chatbot in your application, you can request `api.php?requestType=talk&userInput=hello`。
 
 
 ## 8. about the regular expressions
@@ -51,7 +55,7 @@ _ ---> .*
 
 ## 9. about aiml tags
 
-> * it is different from the standard aiml，i made some customizaton to aiml tags , you can see the tag rules in [AIML.MD](AIML.md) file。
+> it is different from the standard aiml，i made some customizaton to aiml tags , you can see the tag rules in [AIML.MD](AIML.md) file。
 
 ## 10. about the response of api.php
 
