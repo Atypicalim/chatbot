@@ -246,7 +246,25 @@
 
 > 这标签的结果不会添加到回复结果，但是用聊天机器人api中的另一个变量的形式返回给客户，纯粹是用来给用户传递参数用的。
 
-## 22. github 地址
+
+## 22. system
+
+```xml
+<category>
+    <pattern>system</pattern>
+    <template>
+        <system>
+            date_default_timezone_set('PRC');
+            return date('Y/m/d H:i:s');
+        </system>
+    </template>
+</category>
+```
+
+> `system`标签会把标签里面的内容用PHP解析器执行，再把返回值包含返回结果中。
+
+
+## github 地址
 
 > [github/kompasim](https://github.com/kompasim)
 
