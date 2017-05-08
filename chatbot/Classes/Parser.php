@@ -677,7 +677,6 @@ class Parser
         $pattern = trim($pattern);
         $pattern = strtolower($pattern);
         // replace pattern to protect from clean up
-        $pattern = str_replace('_', '*', $pattern); // _ = * in aiml
         $pattern = str_replace(' * ', 'SpaceStarSpace', $pattern);
         $pattern = str_replace('* ', 'StarSpace', $pattern);
         $pattern = str_replace(' *', 'SpaceStar', $pattern);
@@ -696,19 +695,24 @@ class Parser
         $pattern = str_replace('=', 'Equal', $pattern);
         // clean
         $pattern = self::cleanUpPattern($pattern);
+
+
         // restore pattern
         $pattern = str_replace('SpaceStarSpace', '\s(\S+)\s', $pattern);
         $pattern = str_replace('StarSpace', '(\S+)\s', $pattern);
         $pattern = str_replace('SpaceStar', '\s(\S+)', $pattern);
         $pattern = str_replace('Star', '(\S+)', $pattern);
+
         $pattern = str_replace('SpaceWellSpace', '\s\S+\s', $pattern);
         $pattern = str_replace('SpaceWell', '\s\S+', $pattern);
         $pattern = str_replace('WellSpace', '\S+\s', $pattern);
         $pattern = str_replace('Well', '\S+', $pattern);
-        $pattern = str_replace('SpaceLineSpace', '\s.+\s', $pattern);
-        $pattern = str_replace('LineSpace', '.+\s', $pattern);
-        $pattern = str_replace('SpaceLine', '\s.+', $pattern);
-        $pattern = str_replace('Line', '.+', $pattern);
+
+        $pattern = str_replace('SpaceLineSpace', '\s.*\s', $pattern);
+        $pattern = str_replace('LineSpace', '.*\s', $pattern);
+        $pattern = str_replace('SpaceLine', '\s.*', $pattern);
+        $pattern = str_replace('Line', '.*', $pattern);
+
         $pattern = str_replace('SpaceEqualSpace', '\s\S*\s', $pattern);
         $pattern = str_replace('EqualSpace', '\S*\s', $pattern);
         $pattern = str_replace('SpaceEqual', '\s\S*', $pattern);
@@ -736,6 +740,18 @@ class Parser
             self::$_star = $matches;
             self::compileStar($template);
         }
+
+        if(LOG && $is_match){
+            print("\n\n=======matches=======\ninput : ");
+            print_r($input);
+            print("\n---------------\npattern : ");
+            print_r($old_pattern);
+            print("\n---------------\nregex : ");
+            print_r($pattern);
+            print("\n=====================\n\n");
+        }
+
+
         // return match
         return $is_match;
     }
