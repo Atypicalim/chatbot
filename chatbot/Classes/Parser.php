@@ -356,7 +356,7 @@ class Parser
         if ($SytemNodes = self::getAllTagsByName($node, './system')) {
             foreach ($SytemNodes as $system) {
                 // process $system
-                exec( self::processDomElement($system),$output ) ;
+                $output = eval(self::processDomElement($system));
                 $newNode = self::$_domDoc->createTextNode(implode("\n",$output));
                 // replace child for the value
                 $node->replaceChild($newNode, $system);

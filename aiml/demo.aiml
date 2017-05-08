@@ -225,17 +225,18 @@
                 </template>
             </category>
         -->
+
         <!-- 系统调用 -->
-        <!--
-            <category>
-                <pattern>system</pattern>
-                <template>
-                    <system>
-                        learn("<input index="1"/>","<input index="2"/>")
-                    </system>
-                </template>
-            </category>
-        -->
+        <category>
+            <pattern>system</pattern>
+            <template>
+                <system>
+                    date_default_timezone_set('PRC');
+                    return date('Y/m/d H:i:s');
+                </system>
+            </template>
+        </category>
+
 
         <!-- 思考 -->
         <!--
