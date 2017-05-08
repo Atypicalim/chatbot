@@ -206,6 +206,9 @@ class Parser
         // compile think
         self::compileThink($template);
 
+        // compile system
+        self::compileSystem($template);
+
         // compile srai
         self::compileSrai($template);
 
@@ -344,6 +347,19 @@ class Parser
                 self::processDomElement($think);
                 // remove think node
                 $node->removeChild($think);
+            }
+        }
+    }
+
+    static private function compileSystem(DOMElement $node)
+    {
+        if ($SytemNodes = self::getAllTagsByName($node, './system')) {
+            foreach ($SytemNodes as $system) {
+                // process $system
+                exec( self::processDomElement($system),$output ) ;
+                $newNode = self::$_domDoc->createTextNode(implode("\n",$output));
+                // replace child for the value
+                $node->replaceChild($newNode, $system);
             }
         }
     }
