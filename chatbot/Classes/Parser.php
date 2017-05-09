@@ -158,7 +158,7 @@ class Parser
                 }
             }
         }
-        if ($responseString == ''){
+        if ($responseString == '') {
             //  process template if  match a cateegory in aiml root tag, else search all topics
             if ($category = self::searchCategory(self::$_domXPath->query("./aiml", self::$_domDoc)->item(0))) {
                 // pre-process template tag and set response
@@ -184,19 +184,19 @@ class Parser
         }
         // if response string is empty return default in root aiml tag
 
-            if ($responseString == "" && count(self::$_data['topics']) > 0) {
-                $xpathQuery = "./aiml/topic[@name='" . self::getTopicFromData(0) . "']/default";
-                if ($default = self::$_domXPath->query($xpathQuery, self::$_domDoc)->item(0)) {
-                    $responseString = self::processDomElement($default);
-                }
+        if ($responseString == "" && count(self::$_data['topics']) > 0) {
+            $xpathQuery = "./aiml/topic[@name='" . self::getTopicFromData(0) . "']/default";
+            if ($default = self::$_domXPath->query($xpathQuery, self::$_domDoc)->item(0)) {
+                $responseString = self::processDomElement($default);
             }
-            if ($responseString == "") {
-                if ($default = self::$_domXPath->query('./aiml/default', self::$_domDoc)->item(0)) {
-                    $responseString = self::processDomElement($default);
-                } else {
-                    $responseString = "no category matched and no default tag ...";
-                }
+        }
+        if ($responseString == "") {
+            if ($default = self::$_domXPath->query('./aiml/default', self::$_domDoc)->item(0)) {
+                $responseString = self::processDomElement($default);
+            } else {
+                $responseString = "no category matched and no default tag ...";
             }
+        }
 
         return $responseString;
     }
@@ -357,7 +357,7 @@ class Parser
             foreach ($SytemNodes as $system) {
                 // process $system
                 $output = eval(self::processDomElement($system));
-                $newNode = self::$_domDoc->createTextNode(implode("\n",$output));
+                $newNode = self::$_domDoc->createTextNode(implode("\n", $output));
                 // replace child for the value
                 $node->replaceChild($newNode, $system);
             }
@@ -380,8 +380,7 @@ class Parser
                     $human->setProp($name, $value);
                     $human->saveAllProps();
                 }
-                // remove node
-                $node->removeChild($setNode);
+                $node->replaceChild(self::$_domDoc->createTextNode($value), $setNode);
             }
         }
     }
@@ -412,11 +411,11 @@ class Parser
                 $human = $type == 'user' ? self::$_user : ($type == 'bot' ? self::$_bot : '');
                 LOG && print "del " . $name . " from " . $type . "\n";
                 if ($name != "" && $human != '') {
+                    $res = $human->getProp($name);
                     $human->delProp($name);
                     $human->saveAllProps();
                 }
-                // remove node
-                $node->removeChild($delNode);
+                $node->replaceChild(self::$_domDoc->createTextNode($res), $delNode);
             }
         }
     }
@@ -441,6 +440,7 @@ class Parser
                         // save
                         self::$_user->setProp($name, $value);
                         self::$_user->saveAllProps();
+                        $res = $value;
                     }
                 }
                 $node->replaceChild(self::$_domDoc->createTextNode($res), $userNode);
@@ -467,6 +467,7 @@ class Parser
                         // save
                         self::$_bot->setProp($name, $value);
                         self::$_bot->saveAllProps();
+                        $res = $value;
                     }
                 }
                 $node->replaceChild(self::$_domDoc->createTextNode($res), $botNode);
@@ -510,7 +511,7 @@ class Parser
         if ($srais = self::getAllTagsByName($node, './srai')) {
             foreach ($srais as $srai) {
 //                // fix for loop error in srai and that in same category
-                array_push(self::$_data['that'], '');
+                self::addThatToData("");
 //                // re-find another response for srai and replace
                 $newNode = self::$_domDoc->createTextNode(self::getResponseString(self::processDomElement($srai)));
                 $node->replaceChild($newNode, $srai);
@@ -528,7 +529,7 @@ class Parser
                 // get index
                 if ($inputNode->hasAttributes() && $inputNode->getAttribute('index') != '') {
                     $index = intval($inputNode->getAttribute('index'));
-                    $index--;
+//                    $index--;
                 }
                 // get value
                 $value = self::getInputFromData($index);
@@ -741,7 +742,7 @@ class Parser
             self::compileStar($template);
         }
 
-        if(LOG && $is_match){
+        if (LOG && $is_match) {
             print("\n\n=======matches=======\ninput : ");
             print_r($input);
             print("\n---------------\npattern : ");
@@ -764,7 +765,7 @@ class Parser
         array_push(self::$_data['input'], $input);
         // if array length is more than 10, cut-off
         if (count(self::$_data['input']) > 10) {
-            array_shift(self::$_data['input']);
+            self::$_data['input'] = array_slice(self::$_data['input'], count(self::$_data['input']) - 10, 10);
         }
     }
 
@@ -774,7 +775,7 @@ class Parser
         array_push(self::$_data['that'], $lastResponse);
         // if array length is more than 10, cut-off
         if (count(self::$_data['that']) > 10) {
-            array_shift(self::$_data['that']);
+            self::$_data['that'] = array_slice(self::$_data['that'], count(self::$_data['that']) - 10, 10);
         }
     }
 
@@ -788,7 +789,7 @@ class Parser
             array_push(self::$_data['topics'], $node->getAttribute('name'));
             // if array length is more than 10, cut-off
             if (count(self::$_data['topics']) > 10) {
-                array_shift(self::$_data['topics']);
+                self::$_data['topics'] = array_slice(self::$_data['topics'], count(self::$_data['topics']) - 10, 10);
             }
             return;
         }
@@ -815,7 +816,6 @@ class Parser
                 return '';
             } else {
                 $that = $reverseArray[$index];
-                $that = self::cleanUpPattern($that);
                 return $that;
             }
         }

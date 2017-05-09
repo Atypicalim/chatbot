@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiml version="1.0">
 
+<meta name="author" content="kompasim"/>
 
 <!-- includes -->
-<include file="./demo.aiml"/>
+<include file="./demo/demo.aiml"/>
 
 
 <category>
@@ -14,18 +15,18 @@
 </category>
 
 
-<category>
-    <pattern>你好</pattern>
-    <template>
-        你好 ...
-    </template>
-</category>
-
-
 <default>
-    我不太理解你在说什么  ...
+    <srai>DEFAULT</srai>
 </default>
 
+<category>
+    <pattern>DEFAULT</pattern>
+    <template>
+        <random>
+        <li>كەچۈرۈڭ ، چۈشىنەلمىدىم  ...</li>
+        </random>
+    </template>
+</category>
 
 
 <!-- the uyghur aiml file, you can delete it if don't need -->

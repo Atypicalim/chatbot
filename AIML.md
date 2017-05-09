@@ -82,7 +82,7 @@
 ```xml
 
 <think>
-    <set name="topic">Me</set>
+    <set type="user" name="name">Me</set>
 </think>
 ```
 
@@ -174,7 +174,7 @@
 <user name="name1">
 ```
 
-> 给用户设置属性
+> 给用户设置/获取属性，返回值都会包含在结果里，不想包含就得放在`think`标签里。
 
 
 ## 17. bot
@@ -187,7 +187,7 @@
 <bot name="name1">
 ```
 
-> 给机器人设置属性 
+> 给机器人设置/获取属性，返回值都会包含在结果里，不想包含就得放在`think`标签里。
 
 
 ## 18. set
@@ -200,7 +200,7 @@
 <set type="user" name="name1">value1</set>
 ```
 
-> 设置属性
+> 设置属性，返回值都会包含在结果里，不想包含就得放在`think`标签里。
 
 ## 19. get
 
@@ -209,7 +209,7 @@
 <get type="user" name="name1"/>
 ```
 
-> 获取属性
+> 获取属性，返回值都会包含在结果里，不想包含就得放在`think`标签里。
 
 ## 20. dell
 
@@ -218,7 +218,7 @@
 <del type="user" name="name1"/>
 ```
 
-> 删除属性
+> 删除属性，返回值都会包含在结果里，不想包含就得放在`think`标签里。
 
 ## 21. data
 

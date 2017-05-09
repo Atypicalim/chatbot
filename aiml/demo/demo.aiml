@@ -28,7 +28,51 @@
 
         <!-- ordinary -->
         <category>
-            <pattern>haha</pattern>
+            <pattern>test</pattern>
+            <template>
+                test ...
+            </template>
+        </category>
+
+
+
+        <!-- 必选,提取 * -->
+        <category>
+            <pattern>789 *</pattern>
+            <template>
+                you only can inpt '789 123' ,  '789' or '789123' is unable to match it
+            </template>
+        </category>
+
+        <!-- 必选 # -->
+        <category>
+            <pattern>abc#</pattern>
+            <template>
+                you only can inpt 'abc123' , and 'abc' is unable to match it
+            </template>
+        </category>
+
+        <!-- 可选 = -->
+        <category>
+            <pattern>xyz=</pattern>
+            <template>
+                you can input 'xyz' or 'xyz123'
+            </template>
+        </category>
+
+        <!-- 任意 _ -->
+        <category>
+            <pattern>xyz_</pattern>
+            <template>
+                you can input 'xyz', 'xyz 123' or 'xyz123'
+            </template>
+        </category>
+
+
+
+        <!--data-->
+        <category>
+            <pattern>dataTagTest</pattern>
             <template>
                 <data name="arr1">
                     <attr name="name11">value11</attr>
@@ -42,29 +86,7 @@
             </template>
         </category>
 
-        <!-- 必选 *,# -->
-        <category>
-            <pattern>789 *</pattern>
-            <template>
-                you only can inpt '789 123' , and '789' or '789123' is unable to match it
-            </template>
-        </category>
 
-        <!-- 必选 * -->
-        <category>
-            <pattern>abc#</pattern>
-            <template>
-                you only can inpt 'abc123' , and 'abc' is unable to match it
-            </template>
-        </category>
-
-        <!-- 可选 # -->
-        <category>
-            <pattern>xyz#</pattern>
-            <template>
-                you can input 'xyz' or 'xyz123'
-            </template>
-        </category>
 
         <!-- random -->
         <category>
@@ -86,14 +108,14 @@
             </template>
         </category>
 
-        <!-- remember1 -->
+
+        <!-- set, get, star -->
         <category>
             <pattern>my name is *</pattern>
             <template>
                 ok , your name is
-                <star/>
                 <set type="user" name="name">
-                    <star/>
+                    <star index="1"/>
                 </set>
             </template>
         </category>
@@ -105,6 +127,7 @@
                 , i remembered it last time ...
             </template>
         </category>
+
 
         <!-- 思考上一句 -->
         <category>
@@ -156,7 +179,7 @@
         <category>
             <pattern>true</pattern>
             <template>
-                yeah man , it is deadly belivieable ...
+                yeah man , it is deadly reliable ...
             </template>
         </category>
 
@@ -190,12 +213,14 @@
                 this is three ,
                 1:
                 <input index="1"/>
-                ,<!--- this -->
+                ,<!--- last -->
                 2:
                 <input index="2"/>
-                ,<!--- last -->
+                ,<!--- last last -->
                 3:
-                <input index="3"/> <!--- last last -->
+                <input index="3"/>
+                <!--- last last last -->
+                <!--- this <input index="0"/> -->
             </template>
         </category>
 
