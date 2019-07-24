@@ -9,7 +9,7 @@
 
 ## 0. notice
 
-> the chatbot is writen accordign to AIML 2.5 and [Program-P](https://github.com/pe77/Program-P)，it uses utf-8 and i made some customizaton , there are some differences between standard aiml tags and the tags uses in this program.
+> the chatbot is writen according to AIML 2.5 and [Program-P](https://github.com/pe77/Program-P)，it uses utf-8 and i made some customizaton , there are some differences between standard aiml tags and the tags uses in this program.
 
 ## 1. description
 
