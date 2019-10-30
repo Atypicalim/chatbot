@@ -158,7 +158,3 @@ if ($this->_config->multiChatbot){
 ---
 
 #  Enjoy it
-
-> [https://github.com/kompasim/chatbot](https://github.com/kompasim/chatbot)
-
-![chatbot](./web/img/demo.png)
