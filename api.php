@@ -38,11 +38,14 @@ if (!isset($_REQUEST['requestType']) || !isset($_REQUEST['userInput'])) {
 
     // talk
     if ($_REQUEST['requestType'] == 'talk') {
-        $res = $chatbot->talk($_REQUEST['userInput']);
+        //
+        $userInput = $_REQUEST['userInput'];
+        $chatbotReply = $chatbot->talk($userInput);
+        //
         $data = $chatbot->getData();
         $result['status'] = 'success';
         $result['type'] = 'talk';
-        $result['message'] = trim(preg_replace("/\s+/", " ", $res));
+        $result['message'] = trim(preg_replace("/\s+/", " ", $chatbotReply));
         $result['data'] = $data;
     } elseif ($_REQUEST['requestType'] == 'forget') {
         $chatbot->forget();

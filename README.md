@@ -9,7 +9,7 @@
 
 ## 0. notice
 
-> the chatbot is writen according to AIML 2.5 and [Program-P](https://github.com/pe77/Program-P)，it uses utf-8 and i made some customizaton , there are some differences between standard aiml tags and the tags uses in this program.
+> the chatbot is written according to AIML 2.5 and [Program-P](https://github.com/pe77/Program-P)，it uses utf-8 and i made some customization , there are some differences between standard aiml tags and the tags used in this program.
 
 ## 1. description
 
@@ -26,7 +26,7 @@
 
 ## 5. about aiml files
 
-> * `aiml` files should be paleced in `aiml`directory. 
+> * `aiml` files should be paleced in `aiml` directory. 
 
 > * `chatbot.aiml`is the entrance ，the `aiml` tag in it can contain various `category` tag , a `default`tag and various `include`tag。
 
@@ -154,7 +154,9 @@ if ($this->_config->multiChatbot){
 
 
 
+
+# Enjoy it
+
+![screenshot](./screenshot.jpg)
+
 ---
-
-#  Enjoy it
-

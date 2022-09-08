@@ -23,7 +23,10 @@
     <pattern>DEFAULT</pattern>
     <template>
         <random>
-        <li>كەچۈرۈڭ ، چۈشىنەلمىدىم  ...</li>
+        <li>I didn't understand, what you mean ?</li>
+        <li>what the fuck are you talking about man!</li>
+        <li>sounds good, but i have no idea about it.</li>
+        <li>teach me something in aiml files.</li>
         </random>
     </template>
 </category>
