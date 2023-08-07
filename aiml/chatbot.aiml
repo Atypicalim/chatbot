@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aiml version="1.0">
+
+<meta name="author" content="kompasim"/>
+
+<!-- includes -->
+<include file="./demo/demo.aiml"/>
+
+
+<category>
+    <pattern>hello</pattern>
+    <template>
+        hello ...
+    </template>
+</category>
+
+
+<default>
+    <srai>DEFAULT</srai>
+</default>
+
+<category>
+    <pattern>DEFAULT</pattern>
+    <template>
+        <random>
+        <li>I didn't understand, what you mean ?</li>
+        <li>what the fuck are you talking about man!</li>
+        <li>sounds good, but i have no idea about it.</li>
+        <li>teach me something in aiml files.</li>
+        </random>
+    </template>
+</category>
+
+
+<!-- the uyghur aiml file, you can delete it if don't need -->
+
+</aiml>
