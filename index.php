@@ -97,7 +97,7 @@ form {
     <div id="box1">
         <br>
         <br>
-        <h2><a target="_blank" href="https://github.com/kompasim/chatbot">Chatbot</a></h2>
+        <h2><a target="_blank" href="https://github.com/Atypicalim/chatbot">Chatbot</a></h2>
         <br>
         <br>
         <div class="chatBox">
